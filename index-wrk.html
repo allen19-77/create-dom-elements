@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tablets</title>
+</head>
+<style>
+	.tablets-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+
+		border: 1px solid green;
+
+		width: 200px;
+	}
+
+	.tablet {
+		background-color: green;
+		color: yellow;
+		font-size: 25px;
+		line-height: 27px;
+		padding: 5px 10px;
+	}
+</style>
+
+<body>
+	<div class="tablets-container">
+
+	</div>
+
+
+</body>
+<script>
+
+	function createTablet(tabletNote, tabletStyleObj) {
+		let styleStr = ''
+		for (let propertyName in tabletStyleObj) {
+			styleStr += `${propertyName}: ${tabletStyleObj[propertyName]}; `
+		}
+		const tablet = document.createElement('div')
+		tablet.setAttribute('class', 'tablet')
+		tablet.setAttribute('style', styleStr)
+		tablet.innerText = tabletNote
+		return tablet
+	}
+
+	const tabletsNotes = [
+		{
+			note: 'Слово1',
+			styleData: { 'background-color': 'blue', 'color': 'rgb(255, 153, 0)' }
+		},
+		{
+			note: 'Слово2',
+			styleData: { 'background-color': 'red', 'color': 'rgb(255, 255, 255)' }
+		},
+		{
+			note: 'Слово3',
+			styleData: { 'background-color': 'green', 'color': 'Orange' }
+		}]
+
+	const tabletContainer = document.querySelector('.tablets-container')
+
+	tabletsNotes.forEach((tabletDataObj) => {
+		tabletContainer.appendChild(createTablet(tabletDataObj.note, tabletDataObj.styleData))
+	});
+
+//const tabletContainer = document.querySelector('.tablets-container')
+//tabletContainer.appendChild(createTablet('Слово1'))
+
+
+</script>
+
+</html>
