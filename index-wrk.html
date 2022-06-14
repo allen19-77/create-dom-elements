@@ -40,30 +40,54 @@
 <script>
 
 	function createTablet(tabletNote, tabletStyleObj) {
-		let styleStr = ''
-		for (let propertyName in tabletStyleObj) {
-			styleStr += `${propertyName}: ${tabletStyleObj[propertyName]}; `
-		}
+
 		const tablet = document.createElement('div')
 		tablet.setAttribute('class', 'tablet')
-		tablet.setAttribute('style', styleStr)
+		tablet.setAttribute('style', tabletStyleObj.createStyleStr())
 		tablet.innerText = tabletNote
 		return tablet
 	}
 
+	const styleObjProto = {
+		createStyleStr() {
+			const entries = Object.entries(this)
+			let styleStr = ''
+			for (let entry of entries) {
+				if (typeof entry[1] === "string")
+					styleStr += `${entry[0]}: ${entry[1]}; `
+			}
+			return styleStr
+		}
+	}
+
+
 	const tabletsNotes = [
 		{
 			note: 'Слово1',
-			styleData: { 'background-color': 'blue', 'color': 'rgb(255, 153, 0)' }
+			styleData: {
+				'background-color': 'blue',
+				'color': 'rgb(255, 153, 0)',
+				__proto__: styleObjProto,
+
+			}
 		},
 		{
 			note: 'Слово2',
-			styleData: { 'background-color': 'red', 'color': 'rgb(255, 255, 255)' }
+			styleData: {
+				'background-color': 'red',
+				'color': 'rgb(255, 255, 255)',
+				__proto__: styleObjProto,
+			}
 		},
 		{
 			note: 'Слово3',
-			styleData: { 'background-color': 'green', 'color': 'Orange' }
-		}]
+			styleData: {
+				'background-color': 'green',
+				'color': 'Orange',
+				__proto__: styleObjProto,
+			}
+		}
+	]
 
 	const tabletContainer = document.querySelector('.tablets-container')
 
@@ -71,8 +95,9 @@
 		tabletContainer.appendChild(createTablet(tabletDataObj.note, tabletDataObj.styleData))
 	});
 
-//const tabletContainer = document.querySelector('.tablets-container')
-//tabletContainer.appendChild(createTablet('Слово1'))
+	//const tabletContainer = document.querySelector('.tablets-container')
+	//tabletContainer.appendChild(createTablet('Слово1'))
+
 
 
 </script>
